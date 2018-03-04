@@ -124,10 +124,7 @@ if (typeof(ipa_data) == "undefined"){
     ],
   })
 }else{  // 导入并安装 ipa
-  var regex = /\.ipa$/
-  var match = regex.exec(ipa_data.fileName)
-
-  if(!match || match[0] != '.ipa'){
+  if (ipa_data.fileName.indexOf(".ipa") == -1){
     $ui.alert({
       title: "提示",
       message: "请从分享面板导入 ipa 文件",
@@ -141,48 +138,46 @@ if (typeof(ipa_data) == "undefined"){
         }
       ]
     })
-  }
-
-  var timestamp = Math.round(new Date().getTime() / 1000)
+  }else{
+    var timestamp = Math.round(new Date().getTime() / 1000)
   
-  // 上传 ipa 文件
-  $http.upload({
-    url: config.api,
-    form: {
-      token: config.token
-    },
-    files: [
-      {
-        "data": ipa_data,
-        "name": "file",
-        "filename": timestamp
-      }
-    ],
-    showsProgress: false,
-    progress: function(percentage) {
-      $ui.progress(percentage, "ipa 上传中...")
-    },
-    handler: function(resp) {
-      if(!resp.data.status){
-          $ui.alert({
-            title: "错误",
-            message: resp.data.msg,
-            actions: [
-              {
-                title: "确定",
-                handler: function() {
-                  $context.close()
-                  $app.close()
+    // 上传 ipa 文件
+    $http.upload({
+      url: config.api,
+      form: {
+        token: config.token
+      },
+      files: [
+        {
+          "data": ipa_data,
+          "name": "file",
+          "filename": timestamp
+        }
+      ],
+      showsProgress: false,
+      progress: function(percentage) {
+        $ui.progress(percentage, "ipa 上传中...")
+      },
+      handler: function(resp) {
+        if(!resp.data.status){
+            $ui.alert({
+              title: "错误",
+              message: resp.data.msg,
+              actions: [
+                {
+                  title: "确定",
+                  handler: function() {
+                    $context.close()
+                    $app.close()
+                  }
                 }
-              }
-            ]
-          })
-      }else{
-        $app.openURL("itms-services://?action=download-manifest&url="+resp.data.plist)
+              ]
+            })
+        }else{
+          $app.openURL("itms-services://?action=download-manifest&url="+resp.data.plist)
+        }
       }
-    }
-  })
-
-
+    })
+  }
 }
 
