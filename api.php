@@ -15,10 +15,11 @@
     }
     
     // 限制文件类型
+    /* 暂时关闭验证
     $file_type = strtolower($_FILES['file']['type']);
     if($file_type != 'application/zip') {
         error( '文件类型错误' . $file_type );
-    }
+    }*/
 
     // 判断文件是否是通过 HTTP POST 上传的
     if(!is_uploaded_file($_FILES['file']['tmp_name'])) {
