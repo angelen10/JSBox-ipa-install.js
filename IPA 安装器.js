@@ -4,7 +4,13 @@
  * 使用场景：可随时随安装自己备份在手机里的 ipa 包
 
  * 服务端部署方法：
-   1、要有一个可以允许 PHP 环境
+    1、要有一个可以运行 PHP 环境并且支持 https 访问的服务器
+    2、把 api.php 上传到你的服务器中 https://raw.githubusercontent.com/meishixiu/JSBox-ipa-install.js/master/api.php
+    3、在 JSBox 中运行本脚本并配置好 api 接口地址和 token (密码)
+
+ * 手机上安装 ipa 方法：
+    1、在电脑上把需要的 ipa 备份到手机的 iCloud Drive 或者 Shu 这类文件管理器中
+    2、在这些文件管理器中点击分享按钮，打开分享面板，ipa 导入到 JSBox 里，然后“IPA 安装器”进行安装
 
  * 作者：https://t.me/HaoDou
  
