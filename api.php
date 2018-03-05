@@ -6,7 +6,7 @@
     }
     
     // 文件名
-    $file_name = $_FILES['file']['name'];
+    $file_name = isset($_POST['filename']) ? $_POST['filename'] : $_FILES['file']['name'];
 
     //限制文件大小  
     $file_size = $_FILES['file']['size'];
